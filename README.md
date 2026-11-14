@@ -1,2 +1,1 @@
-# catalogue-service
-Microservice pour le projet DevOps II
+# Catalogue Service
