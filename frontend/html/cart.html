@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panier</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-page="cart">
+    <header class="site-header">
+      <a class="brand" href="index.html">Catalogue</a>
+      <nav aria-label="Navigation principale">
+        <a href="index.html">Produits</a>
+        <a class="active" href="cart.html">Panier <span id="cart-count" class="badge">0</span></a>
+        <a href="history.html">Historique</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="page-heading">
+        <p class="eyebrow">Votre sélection</p>
+        <h1>Mon panier</h1>
+        <p>Vérifiez vos articles avant de passer la commande.</p>
+      </section>
+
+      <p id="cart-message" class="message" role="status"></p>
+      <div class="cart-layout">
+        <section id="cart-items" class="panel" aria-live="polite"></section>
+        <aside class="summary panel">
+          <h2>Résumé</h2>
+          <div class="summary-line">
+            <span>Total</span>
+            <strong id="cart-total">0,00 €</strong>
+          </div>
+          <button id="checkout-button" class="button primary" type="button">Commander</button>
+        </aside>
+      </div>
+    </main>
+
+    <script src="js/app.js" defer></script>
+  </body>
+</html>
