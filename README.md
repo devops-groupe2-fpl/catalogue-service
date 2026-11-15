@@ -1,63 +1,64 @@
-# Catalogue Service
+# Service Catalogue
 
-Catalogue microservice and static frontend for the DevOps II Group 2 project.
+Microservice Catalogue et frontend statique du projet DevOps II — Groupe 2.
 
-## Ouzziki progress
+## Avancement d’Ouzziki
 
-### Completed
+### Tâches terminées
 
-- PostgreSQL catalogue schema in `db/schema.sql`.
-- Catalogue seed data in `db/seed.sql`.
-- Express API with:
+- Schéma PostgreSQL du catalogue dans `db/schema.sql`.
+- Données de test du catalogue dans `db/seed.sql`.
+- API Express avec les routes suivantes :
   - `GET /health`
   - `GET /products`
   - `GET /products/:id`
-- PostgreSQL access through the `DATABASE_URL` environment variable.
-- HTTP status handling for successful responses, missing products (`404`) and database errors (`500`).
-- Static frontend with three pages:
-  - `frontend/html/index.html`: product catalogue;
-  - `frontend/html/cart.html`: shopping cart;
-  - `frontend/html/history.html`: order history.
-- Responsive and professional CSS styling in `frontend/html/css/style.css`.
-- Relative frontend API URLs prepared for the group Ingress (`/api/...`).
-- Frontend Nginx configuration in `frontend/nginx.conf`.
+- Connexion à PostgreSQL avec la variable d’environnement `DATABASE_URL`.
+- Gestion des codes HTTP : réponses réussies, produit absent (`404`) et erreurs de base de données (`500`).
+- Frontend statique avec trois pages :
+  - `frontend/html/index.html` : catalogue des produits ;
+  - `frontend/html/cart.html` : panier ;
+  - `frontend/html/history.html` : historique des commandes.
+- Style responsive et professionnel dans `frontend/html/css/style.css`.
+- URLs relatives du frontend préparées pour l’Ingress du groupe (`/api/...`).
+- Configuration Nginx dans `frontend/nginx.conf`.
+- Documentation de l’avancement dans ce fichier `README.md`.
 
-### Validation completed
+### Vérifications effectuées
 
-- JavaScript syntax checks passed.
-- `GET /health` returned `200 OK`.
-- Catalogue API was prepared for testing with PostgreSQL and Docker.
-- Changes are pushed to the branch `feature/ouzziki/schema-catalogue`.
+- Vérification de la syntaxe JavaScript réussie.
+- La route `GET /health` retourne `200 OK`.
+- L’API Catalogue est prête à être testée avec PostgreSQL et Docker.
+- Les modifications sont poussées sur la branche `feature/ouzziki/schema-catalogue`.
 
-### Remaining work
+### Travail restant
 
-- Add Jest/Supertest unit tests for the Catalogue API.
-- Add the Catalogue and Frontend Dockerfiles.
-- Add Jenkins pipelines for Catalogue and Frontend.
-- Complete versioning, release tags and changelog.
-- Create the final Pull Request after group review.
+- Ajouter les tests unitaires Jest/Supertest de l’API Catalogue.
+- Ajouter les Dockerfiles du Catalogue et du Frontend.
+- Ajouter les pipelines Jenkins du Catalogue et du Frontend.
+- Compléter le versioning, les tags de release et le changelog.
+- Créer la Pull Request finale après la revue du groupe.
 
-## Dependencies with the other services
+## Dépendances avec les autres services
 
-The Catalogue API is independent and can be developed and tested separately.
+L’API Catalogue est indépendante et peut être développée et testée séparément.
 
-The frontend is ready, but full integration depends on:
+L’intégration complète du frontend dépend cependant de :
 
-- **Zineb / Panier**: `/api/panier/cart/:userId` and cart actions;
-- **Hasna / Commandes**: `/api/commandes/orders/:userId` and checkout;
-- **Zakaria / Infrastructure**: Kubernetes Ingress routing for `/api/...`.
+- **Zineb / Panier** : `/api/panier/cart/:userId` et les actions du panier ;
+- **Hasna / Commandes** : `/api/commandes/orders/:userId` et la validation de commande ;
+- **Zakaria / Infrastructure** : le routage Kubernetes Ingress pour `/api/...`.
 
-The frontend currently uses `user1` as the temporary user identifier.
+Le frontend utilise temporairement `user1` comme identifiant utilisateur.
 
-## Prerequisites
+## Prérequis
 
-- Node.js 18 or newer;
-- npm;
-- Docker, for PostgreSQL and later container tests.
+- Node.js 18 ou une version plus récente ;
+- npm ;
+- Docker, pour PostgreSQL et les futurs tests des conteneurs.
 
-## Run the Catalogue API locally
+## Lancer l’API Catalogue localement
 
-Start PostgreSQL with Docker:
+Démarrer PostgreSQL avec Docker :
 
 ```bash
 docker run --name catalogue-postgres \
@@ -68,14 +69,14 @@ docker run --name catalogue-postgres \
   -d postgres:16-alpine
 ```
 
-Create the schema and sample data:
+Créer le schéma et ajouter les données de test :
 
 ```bash
 docker exec -i catalogue-postgres psql -U catalogue -d catalogue < db/schema.sql
 docker exec -i catalogue-postgres psql -U catalogue -d catalogue < db/seed.sql
 ```
 
-Install dependencies and start the service:
+Installer les dépendances et démarrer le service :
 
 ```bash
 npm install
@@ -84,7 +85,7 @@ export PORT=3000
 npm start
 ```
 
-Test the API:
+Tester l’API :
 
 ```bash
 curl http://localhost:3000/health
@@ -92,16 +93,16 @@ curl http://localhost:3000/products
 curl http://localhost:3000/products/1
 ```
 
-## Run the frontend locally
+## Lancer le frontend localement
 
-In a second terminal:
+Dans un deuxième terminal :
 
 ```bash
 cd frontend/html
 python3 -m http.server 8080
 ```
 
-Open:
+Ouvrir ensuite :
 
 ```text
 http://localhost:8080/index.html
@@ -109,21 +110,21 @@ http://localhost:8080/cart.html
 http://localhost:8080/history.html
 ```
 
-The pages can be checked visually now. Full `/api/...` integration requires the group Ingress or a local reverse proxy.
+Les pages peuvent déjà être vérifiées visuellement. L’intégration complète des URLs `/api/...` nécessite l’Ingress du groupe ou un proxy inverse local.
 
-## API response format
+## Format de réponse de l’API
 
-Each product is returned using the frontend-friendly format:
+Chaque produit est retourné avec le format utilisé par le frontend :
 
 ```json
 {
   "id": 1,
   "name": "Laptop Pro 14",
   "price": 1299.99,
-  "description": "Portable laptop for professional use.",
+  "description": "Ordinateur portable pour un usage professionnel.",
   "stock": 12,
   "createdAt": "2026-01-15T10:00:00.000Z"
 }
 ```
 
-The database column `created_at` is mapped to `createdAt` by the API.
+La colonne `created_at` de la base de données est convertie en `createdAt` par l’API.
