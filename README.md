@@ -38,17 +38,23 @@ Microservice Catalogue et frontend statique du projet DevOps II — Groupe 2.
 - Compléter le versioning, les tags de release et le changelog.
 - Créer la Pull Request finale après la revue du groupe.
 
-## Dépendances avec les autres services
+## ⚠️ Dépendances avec les autres services
 
-L’API Catalogue est indépendante et peut être développée et testée séparément.
+> [!IMPORTANT]
+> **L’API Catalogue est indépendante.** Elle peut être développée et testée séparément, sans attendre les autres services.
 
-L’intégration complète du frontend dépend cependant de :
+### Intégration du frontend
 
-- **Zineb / Panier** : `/api/panier/cart/:userId` et les actions du panier ;
-- **Hasna / Commandes** : `/api/commandes/orders/:userId` et la validation de commande ;
-- **Zakaria / Infrastructure** : le routage Kubernetes Ingress pour `/api/...`.
+L’intégration complète du frontend nécessite encore les éléments suivants :
 
-Le frontend utilise temporairement `user1` comme identifiant utilisateur.
+| Membre | Élément nécessaire | État |
+|---|---|---|
+| **Zineb — Panier** | `/api/panier/cart/:userId` et les actions du panier | En attente de l’intégration |
+| **Hasna — Commandes** | `/api/commandes/orders/:userId` et la validation de commande | En attente du service Commandes |
+| **Zakaria — Infrastructure** | Routage Kubernetes Ingress pour `/api/...` | En attente de l’Ingress |
+
+> [!NOTE]
+> Le frontend utilise temporairement `user1` comme identifiant utilisateur, en attendant la mise en place de l’authentification.
 
 ## Prérequis
 
