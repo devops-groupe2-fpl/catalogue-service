@@ -1,1 +1,5 @@
-node_modules/\n.env\n*.log\ndist/
+node_modules/
+.env
+*.log
+dist/
+coverage/
