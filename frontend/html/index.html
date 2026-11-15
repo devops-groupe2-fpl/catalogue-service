@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catalogue</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-page="catalogue">
+    <header class="site-header">
+      <a class="brand" href="index.html">Catalogue</a>
+      <nav aria-label="Navigation principale">
+        <a class="active" href="index.html">Produits</a>
+        <a href="cart.html">Panier <span id="cart-count" class="badge">0</span></a>
+        <a href="history.html">Historique</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="page-heading">
+        <p class="eyebrow">Boutique en ligne</p>
+        <h1>Notre catalogue</h1>
+        <p>Découvrez nos produits et ajoutez-les à votre panier.</p>
+      </section>
+
+      <p id="catalogue-message" class="message" role="status"></p>
+      <section id="products-list" class="product-grid" aria-live="polite"></section>
+    </main>
+
+    <script src="js/app.js" defer></script>
+  </body>
+</html>
