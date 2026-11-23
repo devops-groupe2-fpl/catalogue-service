@@ -1,0 +1,46 @@
+pipeline {
+  agent any
+  environment {
+    DOCKERHUB_USER = 'ouzziki'
+    IMAGE = "${DOCKERHUB_USER}/frontend"
+    TAG = "v${BUILD_NUMBER}"
+  }
+  triggers {
+    pollSCM('H/2 * * * *')
+  }
+  stages {
+    stage('Build') {
+      steps {
+        sh 'docker build -t $IMAGE:$TAG -f frontend/Dockerfile frontend/'
+      }
+    }
+    stage('Test') {
+      steps {
+        sh 'docker run --rm -d -p 8080:80 --name frontend-test $IMAGE:$TAG && sleep 3 && curl -f http://localhost:8080/ && docker stop frontend-test || (docker stop frontend-test; exit 1)'
+      }
+    }
+    stage('Push') {
+      steps {
+        withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials',
+          usernameVariable: 'DH_USER',
+          passwordVariable: 'DH_PASS')]) {
+          sh 'echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin'
+          sh 'docker push $IMAGE:$TAG'
+        }
+      }
+    }
+    stage('Deploy') {
+      steps {
+        sh 'kubectl set image deployment/frontend frontend=$IMAGE:$TAG'
+        sh 'kubectl rollout status deployment/frontend --timeout=120s'
+      }
+    }
+  }
+  post {
+    always {
+      sh 'docker logout || true'
+      sh 'docker stop frontend-test 2>/dev/null || true'
+      sh 'docker rm frontend-test 2>/dev/null || true'
+    }
+  }
+}

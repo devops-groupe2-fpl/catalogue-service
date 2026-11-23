@@ -5,7 +5,7 @@ const router = express.Router();
 
 function toProduct(row) {
   return {
-    id: row.id,
+    id: Number(row.id),
     name: row.name,
     price: Number(row.price),
     description: row.description,
