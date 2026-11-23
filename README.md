@@ -56,8 +56,8 @@ Pour respecter cela, **ne pas utiliser un seul compte commun** — chacun pousse
 
 | Membre | Service | Image Docker Hub | Jenkinsfile `DOCKERHUB_USER` |
 |---|---|---|---|
-| **Ouzziki Lhoussaine** | Catalogue | `ouzzikilhoussaine/catalogue:v1.0.0` | `ouzzikilhoussaine` |
-| **Ouzziki Lhoussaine** | Frontend | `ouzzikilhoussaine/frontend:v1.0.0` | `ouzzikilhoussaine` |
+| **Ouzziki Lhoussaine** | Catalogue | `ouzzikilhoussaine/catalogue:v1.0.0` | `ouzziki` |
+| **Ouzziki Lhoussaine** | Frontend | `ouzzikilhoussaine/frontend:v1.0.0` | `ouzziki` |
 | **Zineb Hajaj** | Panier | `zinebhajaj/panier:vX.X.X` | `zinebhajaj` |
 | **Hasna ELhassani** | Commandes | `hasnaelhassani/commandes:vX.X.X` | `hasnaelhassani` |
 | **Zakaria Aribi** | Infra | `zakiar3312/...` ou `k8s` manifests uniquement | — |
